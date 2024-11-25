@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Калькулятор заработка</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .slider-container {
+            margin-bottom: 20px;
+        }
+        .slider-label {
+            font-size: 18px;
+        }
+        .result {
+            font-size: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Калькулятор заработка</h1>
+
+    <div class="slider-container">
+        <label for="days" class="slider-label">Дни (от 8 до 30):</label>
+        <input type="range" id="days" min="8" max="30" value="8" step="1">
+        <span id="daysValue">8</span>
+    </div>
+
+    <div class="slider-container">
+        <label for="hours" class="slider-label">Часы (от 9 до 15):</label>
+        <input type="range" id="hours" min="9" max="15" value="9" step="1">
+        <span id="hoursValue">9</span>
+    </div>
+
+    <div class="result">
+        <p>Ваш заработок: <span id="earnings">0</span> рублей</p>
+    </div>
+
+    <script>
+        // Получаем элементы с ползунками и значениями
+        const daysSlider = document.getElementById('days');
+        const hoursSlider = document.getElementById('hours');
+        const daysValue = document.getElementById('daysValue');
+        const hoursValue = document.getElementById('hoursValue');
+        const earningsDisplay = document.getElementById('earnings');
+
+        // Функция для расчета заработка
+        function calculateEarnings() {
+            const days = parseInt(daysSlider.value);
+            const hours = parseInt(hoursSlider.value);
+            const earnings = (days * (hours + 1)) * 1000;
+            earningsDisplay.textContent = earnings;
+        }
+
+        // Обработчики изменений ползунков
+        daysSlider.addEventListener('input', function() {
+            daysValue.textContent = daysSlider.value;
+            calculateEarnings();
+        });
+
+        hoursSlider.addEventListener('input', function() {
+            hoursValue.textContent = hoursSlider.value;
+            calculateEarnings();
+        });
+
+        // Инициализация отображения
+        calculateEarnings();
+    </script>
+</body>
+</html>
